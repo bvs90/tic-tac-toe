@@ -1,7 +1,9 @@
 angular.module('ticTacToeApp')
   .service('BoardSvc', function () {
     
-    this.createBoard = function() {
+    var Board = this;
+    
+    Board.createBoard = function() {
       var board = [];
       
       for(var i = 0; i < 3; i++) {
@@ -16,7 +18,42 @@ angular.module('ticTacToeApp')
       }
 
       return board;
-    }; 
+    };
+    
+    // check row elements
+    Board.checkRows = function(board, target) {
+      var winner = false;
+      
+      for(var i = 0; i < board.length; i++) {
+        winner = Board.checkForWinner(board[i], target);
+        if (winner) {
+          break;
+        }
+      }
+      
+      return winner;   
+    };
+    
+    // check column elements 
+    
+    // check diagonal (major)
+    
+    // check diagonal (minor) 
+    
+    // check pattern of elements 
+    this.checkForWinner = function(elements, mark) {
+      var target = mark;
+      var winner = true;
+      
+      angular.forEach(elements, function(element) {
+        if(element !== target) {
+          winner = false;
+        }
+      });
+      
+      return winner;
+      
+    };
     
     
     
