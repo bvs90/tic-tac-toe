@@ -70,13 +70,22 @@ angular.module('ticTacToeApp')
     };
     
     // check diagonal (minor) 
-    Board.checkMinorDiagonal = function() {
+    Board.checkMinorDiagonal = function(board, target) {
+      var winner;
+      var diagonal = [];
+      var k = 0;
       
+      for(var i = board.length -1; i >= 0; i--) {
+          diagonal.push(board[i][k]);
+          k++;
+      }
+
+      winner = Board.checkForWinner(diagonal, target);     
+      return winner;      
     };
     
     // check pattern of elements 
-    Board.checkForWinner = function(elements, mark) {
-      var target = mark;
+    Board.checkForWinner = function(elements, target) {
       var winner = true;
       
       angular.forEach(elements, function(element) {
@@ -86,7 +95,6 @@ angular.module('ticTacToeApp')
       });
       
       return winner;
-      
     };
     
     
