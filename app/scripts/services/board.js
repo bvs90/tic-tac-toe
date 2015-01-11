@@ -57,12 +57,15 @@ angular.module('ticTacToeApp')
     };
     
     // check diagonal (major)
-    Board.checkMajorDiagonal = function() {
-      var winner = false;
-      var column = [];
+    Board.checkMajorDiagonal = function(board, target) {
+      var winner;
+      var diagonal = [];
       
-      
-      
+      for(var i = 0; i < board.length; i++) {
+        diagonal.push(board[i][i]);
+      }
+
+      winner = Board.checkForWinner(diagonal, target);     
       return winner;
     };
     
