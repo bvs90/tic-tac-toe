@@ -68,6 +68,15 @@ describe('Service: BoardSvc', function () {
     });
   });
   
+  describe('checkMinorDiagonal method', function() {
+    it('should confirm a winning major diagonal on a given board', function() {
+      var mockBoard = [['o','o','x'],['o', 'x'],['x']];
+      var actual = Board.checkMinorDiagonal(mockBoard, 'x');
+      
+      expect(actual).toBe(true);
+    });
+  });  
+  
   describe('checkForWinner method', function() {
     it('should report a win for 3 of the same value', function() {
       var elements = ['x','x','x'];
