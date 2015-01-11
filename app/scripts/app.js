@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name ticTacToeApp
@@ -8,8 +6,7 @@
  *
  * Main module of the application.
  */
-angular
-  .module('ticTacToeApp', [
+angular.module('ticTacToeApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -21,11 +18,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        controller: 'GameCtrl as game'
       })
       .otherwise({
         redirectTo: '/'

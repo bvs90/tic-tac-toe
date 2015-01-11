@@ -1,17 +1,16 @@
-'use strict';
-
-describe('Controller: AboutCtrl', function () {
+describe('Service: BoardSvc', function () {
 
   // load the controller's module
   beforeEach(module('ticTacToeApp'));
 
-  var AboutCtrl,
-    scope;
+  var BoardSvc,
+      scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($service, $rootScope) {
     scope = $rootScope.$new();
-    AboutCtrl = $controller('AboutCtrl', {
+    
+    BoardSvc = $service('BoardSvc', {
       $scope: scope
     });
   }));
