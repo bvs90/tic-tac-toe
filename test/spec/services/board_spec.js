@@ -3,12 +3,9 @@ describe('Service: BoardSvc', function () {
 
   var Board;
 
-  // Initialize the controller and a mock scope
   beforeEach(inject(function (_BoardSvc_) {
-    // scope = $rootScope.$new();
     Board = _BoardSvc_;
   }));
-
 
   describe('createBoard method', function() {
     var actual;
@@ -18,21 +15,46 @@ describe('Service: BoardSvc', function () {
     });
     
     it('should create a Board array', function () {
-      var expected = [null, null, null];
-      
-      expect(actual).toEqual(expected);
+      expect(Array.isArray(actual)).toEqual(true);
     });
     
     it('should create a Board with 3 rows', function() {
-      var expected = 3;
-      
-      expect(actual.length).toBe(expected);
+      expect(actual.length).toBe(3);
     });
     
     it('should create a Board with 3 columns', function() {
-      var expected = 3;
+      expect(actual[1].length).toBe(3);
+    });
+  });
+  
+  describe('checkRows method', function() {
+    it('should confirm a winning row on a given board', function() {
+      var mockBoard = [['x','x','x']];
+      var actual = Board.checkRows(mockBoard, 'x');
       
-      expect(actual[1].length).toBe(expected);
+      expect(actual).toBe(true);
+    });
+
+    it('should confirm a winning row on a given board with multiple rows', function() {
+      var mockBoard = [['x','o','x'], ['x','x','x'], ['x','o','x']];
+      var actual = Board.checkRows(mockBoard, 'x');
+      
+      expect(actual).toBe(true);
+    });    
+  });
+  
+  describe('checkForWinner method', function() {
+    it('should report a win for 3 of the same value', function() {
+      var elements = ['x','x','x'];
+      var actual = Board.checkForWinner(elements, 'x');
+      
+      expect(actual).toBe(true);
+    });
+    
+    it('should not report a win for mixed values', function() {
+      var actual = Board.checkForWinner(['x','o','x'], 'x');
+      
+      expect(actual).toBe(false);      
     });
   });
   
