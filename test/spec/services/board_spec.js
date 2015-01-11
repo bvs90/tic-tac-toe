@@ -1,21 +1,39 @@
 describe('Service: BoardSvc', function () {
-
-  // load the controller's module
   beforeEach(module('ticTacToeApp'));
 
-  var BoardSvc,
-      scope;
+  var Board;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($service, $rootScope) {
-    scope = $rootScope.$new();
-    
-    BoardSvc = $service('BoardSvc', {
-      $scope: scope
-    });
+  beforeEach(inject(function (_BoardSvc_) {
+    // scope = $rootScope.$new();
+    Board = _BoardSvc_;
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+
+  describe('createBoard method', function() {
+    var actual;
+    
+    beforeEach(function() {
+      actual = Board.createBoard();
+    });
+    
+    it('should create a Board array', function () {
+      var expected = [null, null, null];
+      
+      expect(actual).toEqual(expected);
+    });
+    
+    it('should create a Board with 3 rows', function() {
+      var expected = 3;
+      
+      expect(actual.length).toBe(expected);
+    });
+    
+    it('should create a Board with 3 columns', function() {
+      var expected = 3;
+      
+      expect(actual[1].length).toBe(expected);
+    });
   });
+  
 });
