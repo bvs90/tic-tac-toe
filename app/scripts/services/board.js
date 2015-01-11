@@ -34,14 +34,45 @@ angular.module('ticTacToeApp')
       return winner;   
     };
     
-    // check column elements 
+    // check column elements
+    Board.checkColumns = function(board, target) {
+      var winner = false;
+      var column = [];
+      
+      //iterate through each column
+      for(var i = 0; i < board[i].length; i++) {
+        for(var k = 0; k < board.length; k++) {
+          column.push(board[k][i]);
+        }
+        
+        winner = Board.checkForWinner(column, target);
+        if (winner) {
+          break;
+        } else {
+          column = [];
+        }
+      } 
+       
+      return winner;
+    };
     
     // check diagonal (major)
+    Board.checkMajorDiagonal = function() {
+      var winner = false;
+      var column = [];
+      
+      
+      
+      return winner;
+    };
     
     // check diagonal (minor) 
+    Board.checkMinorDiagonal = function() {
+      
+    };
     
     // check pattern of elements 
-    this.checkForWinner = function(elements, mark) {
+    Board.checkForWinner = function(elements, mark) {
       var target = mark;
       var winner = true;
       

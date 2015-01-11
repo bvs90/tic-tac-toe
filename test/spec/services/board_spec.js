@@ -43,6 +43,22 @@ describe('Service: BoardSvc', function () {
     });    
   });
   
+  describe('checkColumns method', function() {
+    xit('should confirm a winning column on a given board', function() {
+      var mockBoard = [['x'],['x'],['x']];
+      var actual = Board.checkColumns(mockBoard, 'x');
+      
+      expect(actual).toBe(true);
+    });
+
+    it('should confirm a winning column on a given board with multiple columns', function() {
+      var mockBoard = [['x','x','o'], ['o','x','x'], ['x','x','o']];
+      var actual = Board.checkColumns(mockBoard, 'x');
+      
+      expect(actual).toBe(true);
+    });    
+  });
+  
   describe('checkForWinner method', function() {
     it('should report a win for 3 of the same value', function() {
       var elements = ['x','x','x'];
