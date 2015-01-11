@@ -44,7 +44,7 @@ describe('Service: BoardSvc', function () {
   });
   
   describe('checkColumns method', function() {
-    xit('should confirm a winning column on a given board', function() {
+    it('should confirm a winning column on a given board', function() {
       var mockBoard = [['x'],['x'],['x']];
       var actual = Board.checkColumns(mockBoard, 'x');
       
@@ -57,6 +57,15 @@ describe('Service: BoardSvc', function () {
       
       expect(actual).toBe(true);
     });    
+  });
+  
+  describe('checkMajorDiagonal method', function() {
+    it('should confirm a winning major diagonal on a given board', function() {
+      var mockBoard = [['x'],['o', 'x'],['o','o','x']];
+      var actual = Board.checkMajorDiagonal(mockBoard, 'x');
+      
+      expect(actual).toBe(true);
+    });
   });
   
   describe('checkForWinner method', function() {
