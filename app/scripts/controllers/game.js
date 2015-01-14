@@ -8,6 +8,10 @@ angular.module('ticTacToeApp')
     console.log('board', game.board);
     
     // function to mark player move and update view 
+    game.playerMove = function(square) {
+      square.value = 'X';
+    };
+    
     // then check if player has won
     // then run opponent turn function
     // check if opponent has won

@@ -1,8 +1,8 @@
 <!-- This is a view  that will show the game board-->
 <div class="board-container">
   <div ng-repeat="row in game.board" class="row">
-    <div ng-repeat="column in row" class="tile">
-      <span>{{ column.value }}</span>
+    <div ng-repeat="square in row" class="tile" ng-model="square" ng-click="game.playerMove(square)">
+      <span>{{ square.value }}</span>
     </div>
   </div>
 </div>
