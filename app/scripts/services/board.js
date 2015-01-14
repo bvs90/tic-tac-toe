@@ -12,7 +12,7 @@ angular.module('ticTacToeApp')
         var row = [];
         for(var k = 0; k < 3; k++) {
           var tile = {
-            value: 'empty'
+            value: null
           };
           row.push(tile);
         }
