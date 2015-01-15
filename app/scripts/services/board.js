@@ -11,10 +11,12 @@ angular.module('ticTacToeApp')
       for(var i = 0; i < 3; i++) {
         var row = [];
         for(var k = 0; k < 3; k++) {
-          var tile = {
+          var square = {
+            row: i,
+            column: k,
             value: null
           };
-          row.push(tile);
+          row.push(square);
         }
         board.push(row);
       }

@@ -26,7 +26,15 @@ describe('Service: BoardSvc', function () {
       expect(actual[1].length).toBe(3);
     });
     
-    it('should create a board with null values for each square', function() {
+    it('should set a square to have a row value', function() {
+      expect(actual[0][0].row).toBe(0);
+    });
+    
+    it('should set a square to have a column value', function() {
+      expect(actual[0][0].column).toBe(0);
+    });
+    
+    it('should set a square to have a null value', function() {
       expect(actual[0][0].value).toBeNull();
     });
   });
