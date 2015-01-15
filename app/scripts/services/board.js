@@ -22,7 +22,7 @@ angular.module('ticTacToeApp')
       return board;
     };
     
-    Board.scanBoardForWin = function(board, target) {
+    Board.scanBoardForWin = function(board, target) {      
       if (Board._checkRows(board, target) ||
           Board._checkColumns(board, target) ||
           Board._checkMinorDiagonal(board, target) ||
@@ -103,7 +103,7 @@ angular.module('ticTacToeApp')
       var winner = true;
       
       angular.forEach(elements, function(element) {
-        if(element !== target) {
+        if(element.value !== target) {
           winner = false;
         }
       });

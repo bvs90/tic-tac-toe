@@ -25,6 +25,10 @@ describe('Service: BoardSvc', function () {
     it('should create a Board with 3 columns', function() {
       expect(actual[1].length).toBe(3);
     });
+    
+    it('should create a board with null values for each square', function() {
+      expect(actual[0][0].value).toBeNull();
+    });
   });
   
   describe('scanBoardForWin method', function() {
@@ -34,7 +38,7 @@ describe('Service: BoardSvc', function () {
       spyOn(Board, '_checkMajorDiagonal');
       spyOn(Board, '_checkMinorDiagonal');
       
-      var mockBoard = [['x','o','o'], ['x','empty','o'], ['o','empty','x']];
+      var mockBoard = [[{value:'x'},{value:'o'},{value:'o'}], [{value:'x'},{value:'empty'},{value:'o'}], [{value:'o'},{value:null},{value:'x'}]];
       Board.scanBoardForWin(mockBoard, 'x');
       
       expect(Board._checkRows).toHaveBeenCalled();
@@ -45,14 +49,14 @@ describe('Service: BoardSvc', function () {
     });
     
     it('should confirm a win on a board', function() {
-      var mockBoard = [['x','o','x'], ['x','empty','x'], ['o','empty','x']];
+      var mockBoard = [[{value:'x'},{value:'o'},{value:'x'}], [{value:'x'},{value:null},{value:'x'}], [{value:'o'},{value:null},{value:'x'}]];
       var actual = Board.scanBoardForWin(mockBoard, 'x');
       
       expect(actual).toBe(true);      
     });
     
     it('should confirm no win on a board', function() {
-      var mockBoard = [['x','o','o'], ['x','empty','o'], ['o','empty','x']];
+      var mockBoard = [[{value:'x'},{value:'o'},{value:'o'}], [{value:'x'},{value:null},{value:'o'}], [{value:'o'},{value:null},{value:'x'}]];
       var actual = Board.scanBoardForWin(mockBoard, 'x');
       
       expect(actual).toBe(false);      
@@ -61,14 +65,14 @@ describe('Service: BoardSvc', function () {
   
   describe('checkRows method', function() {
     it('should confirm a winning row on a given board', function() {
-      var mockBoard = [['x','x','x']];
+      var mockBoard = [[{value:'x'},{value:'x'},{value:'x'}]];
       var actual = Board._checkRows(mockBoard, 'x');
       
       expect(actual).toBe(true);
     });
 
     it('should confirm a winning row on a given board with multiple rows', function() {
-      var mockBoard = [['x','o','x'], ['x','x','x'], ['x','o','x']];
+      var mockBoard = [[{value:'x'},{value:'o'},{value:'x'}], [{value:'x'},{value:'x'},{value:'x'}], [{value:'x'},{value:'o'},{value:'x'}]];
       var actual = Board._checkRows(mockBoard, 'x');
       
       expect(actual).toBe(true);
@@ -77,14 +81,14 @@ describe('Service: BoardSvc', function () {
   
   describe('checkColumns method', function() {
     it('should confirm a winning column on a given board', function() {
-      var mockBoard = [['x'],['x'],['x']];
+      var mockBoard = [[{value:'x'},{value:'x'},{value:'x'}]];
       var actual = Board._checkColumns(mockBoard, 'x');
       
       expect(actual).toBe(true);
     });
 
     it('should confirm a winning column on a given board with multiple columns', function() {
-      var mockBoard = [['x','x','o'], ['o','x','x'], ['x','x','o']];
+      var mockBoard = [[{value:'x'},{value:'x'},{value:'o'}], [{value:'o'},{value:'x'},{value:'x'}], [{value:'x'},{value:'x'},{value:'o'}]];
       var actual = Board._checkColumns(mockBoard, 'x');
       
       expect(actual).toBe(true);
@@ -93,7 +97,7 @@ describe('Service: BoardSvc', function () {
   
   describe('checkMajorDiagonal method', function() {
     it('should confirm a winning major diagonal on a given board', function() {
-      var mockBoard = [['x'],['o', 'x'],['o','o','x']];
+      var mockBoard = [[{value:'x'}],[{value:'o'},{value:'x'}],[{value:'o'},{value:'o'},{value:'x'}]];
       var actual = Board._checkMajorDiagonal(mockBoard, 'x');
       
       expect(actual).toBe(true);
@@ -102,7 +106,7 @@ describe('Service: BoardSvc', function () {
   
   describe('checkMinorDiagonal method', function() {
     it('should confirm a winning major diagonal on a given board', function() {
-      var mockBoard = [['o','o','x'],['o', 'x'],['x']];
+      var mockBoard = [[{value:'o'},{value:'o'},{value:'x'}],[{value:'o'},{value:'x'}],[{value:'x'}]];
       var actual = Board._checkMinorDiagonal(mockBoard, 'x');
       
       expect(actual).toBe(true);
@@ -111,14 +115,14 @@ describe('Service: BoardSvc', function () {
   
   describe('checkForWinner method', function() {
     it('should report a win for 3 of the same value', function() {
-      var elements = ['x','x','x'];
+      var elements = [{value:'x'},{value:'x'},{value:'x'}];
       var actual = Board._checkForWinner(elements, 'x');
       
       expect(actual).toBe(true);
     });
     
     it('should not report a win for mixed values', function() {
-      var actual = Board._checkForWinner(['x','o','x'], 'x');
+      var actual = Board._checkForWinner([{value:'x'}],[{value:'o'},{value:'x'}], 'x');
       
       expect(actual).toBe(false);      
     });
