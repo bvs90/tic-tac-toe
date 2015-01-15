@@ -1,5 +1,5 @@
 angular.module('ticTacToeApp')
-  .controller('GameCtrl', function (BoardSvc) {
+  .controller('GameCtrl', function (BoardSvc, OpponentSvc) {
     var game = this;
     
     // initialise a board for the game
@@ -13,12 +13,22 @@ angular.module('ticTacToeApp')
     // function to mark player move and update view 
     game.playerMove = function(square) {
       square.value = 'X';
-    // then check if player has won
+      
       if (BoardSvc.scanBoardForWin(game.board, 'X') === true) {
         game.status = 'Player has won!';
+      } else {
+        game.opponentMove(game.board);
       }
-    // then run opponent turn function
-    // check if opponent has won
     };
-    
+      
+    game.opponentMove = function(board) {
+      console.log('updated board', board);
+      OpponentSvc.makeMove(board);
+      
+      if (BoardSvc.scanBoardForWin(game.board, 'O') === true) {
+        game.status = 'Opponent has won!';
+      }
+    };  
+      
+          
   });
