@@ -136,4 +136,17 @@ describe('Service: BoardSvc', function () {
     });
   });
   
+  describe('findEmptySquares method', function() {
+    it('should create a collection of all the empty squares', function() {
+      var mockBoard = [[{value:null}, {value:'O'}], [{value:'X'}, {value:null}], [{value:null}, {value:null}]];
+      var actual = Board.findEmptySquares(mockBoard);
+      
+      expect(actual.length).toBe(4);
+    });
+    
+    it('should return false if there are no empty squares', function() {
+      
+    });  
+  });  
+  
 });

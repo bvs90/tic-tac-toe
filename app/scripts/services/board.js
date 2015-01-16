@@ -3,8 +3,10 @@ angular.module('ticTacToeApp')
     
     var Board = this;
     
-    // Public API
-    
+    /*
+    --- Public API ---
+    */
+       
     Board.createBoard = function() {
       var board = [];
       
@@ -35,8 +37,30 @@ angular.module('ticTacToeApp')
       }
     };
     
-    // Private helper methods 
-     
+    
+    Board.findEmptySquares = function(board) {
+      var emptySquares = [];
+      
+      for(var i = 0; i < board.length; i++) {
+        for(var k = 0; k < board[i].length; k++) {
+          if( board[i][k].value === null) {
+            emptySquares.push(board[i][k]);
+          }
+        }
+      }
+    
+      if (emptySquares.length) {
+        return emptySquares;
+      } else {
+        return false;        
+      }
+    };
+    
+        
+    /* 
+    --- Private helper methods --- 
+    */
+    
     // check row elements
     Board._checkRows = function(board, target) {
       var winner = false;
@@ -112,5 +136,7 @@ angular.module('ticTacToeApp')
       
       return winner;
     };
+    
+    
     
   });
