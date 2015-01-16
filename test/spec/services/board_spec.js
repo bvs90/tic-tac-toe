@@ -145,7 +145,10 @@ describe('Service: BoardSvc', function () {
     });
     
     it('should return false if there are no empty squares', function() {
+      var mockBoard = [[{value:'X'}, {value:'O'}], [{value:'X'}, {value:'O'}], [{value:'X'}, {value:'O'}]];
+      var actual = Board.findEmptySquares(mockBoard);
       
+      expect(actual).toBe(false);      
     });  
   });  
   
